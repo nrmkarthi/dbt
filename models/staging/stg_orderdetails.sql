@@ -1,5 +1,3 @@
-{{ config(materialized='view') }}
-
 select
     orderNumber as order_id,
     productCode as product_id,
