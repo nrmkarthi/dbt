@@ -1,8 +1,8 @@
 {{ config(materialized='view') }}
 
 select
-    {{ dbt_utils.generate_surrogate_key(['productLine']) }} as productline_sk,
-    productLine,
-    textDescription as product_line_description
+    PRODUCTLINE as product_line,
+    TEXTDESCRIPTION as text_description,
+    HTMLDESCRIPTION as html_description
 from {{ source('sales', 'productlines') }}
 
