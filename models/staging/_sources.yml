@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: classicmodels
+  - name: sales        
     database: SALES_DB
     schema: SALES_SCHEMA
     tables:
@@ -12,3 +12,5 @@ sources:
       - name: orderdetails
       - name: products
       - name: productlines
+
+
