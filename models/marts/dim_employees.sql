@@ -6,10 +6,13 @@ select
     LASTNAME,
     EXTENSION,
     EMAIL,
-    OFFICECODE as office_id,     -- alias here
+    OFFICECODE as office_id,     -- use this alias
     REPORTSTO,
     JOBTITLE
 from {{ source('sales', 'employees') }}
+
+
+
 
 
 
