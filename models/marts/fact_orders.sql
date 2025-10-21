@@ -8,7 +8,7 @@ select
     c.customer_name,
     e.employee_id,
     e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
-    e.office_id,   -- use the alias from dim_employees
+    e.OFFICECODE as office_id,
     p.product_id,
     p.productName,
     p.buyPrice,
