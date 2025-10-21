@@ -8,9 +8,9 @@ select
     c.customer_name,
     e.employee_id,
     e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
-    e.OFFICECODE as office_id,
+    e.office_id,
     p.product_id,
-    p.productName,
+    p.product_name,
     p.buyPrice,
     od.QUANTITYORDERED as quantity,
     (od.QUANTITYORDERED * od.PRICEEACH) as total_amount
