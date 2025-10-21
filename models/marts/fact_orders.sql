@@ -1,25 +1,25 @@
 {{ config(materialized='table') }}
 
 select
-    o.orderNumber as order_id,
-    o.orderDate,
-    o.status,
-    o.customerNumber as customer_id,
+    o.ORDERNUMBER as order_id,
+    o.ORDERDATE,
+    o.STATUS,
+    o.CUSTOMERNUMBER as customer_id,
     c.customer_name,
     e.employee_id,
-    e.firstName || ' ' || e.lastName as employee_name,
-    e.officeCode as office_id,
+    e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
+    e.office_id,   -- use the alias from dim_employees
     p.product_id,
     p.productName,
     p.buyPrice,
-    od.quantityOrdered as quantity,
-    (od.quantityOrdered * od.priceEach) as total_amount
+    od.QUANTITYORDERED as quantity,
+    (od.QUANTITYORDERED * od.PRICEEACH) as total_amount
 from {{ ref('stg_orders') }} o
 join {{ ref('stg_orderdetails') }} od
-    on o.orderNumber = od.orderNumber
+    on o.ORDERNUMBER = od.ORDERNUMBER
 join {{ ref('dim_customers') }} c
-    on o.customerNumber = c.customer_id
+    on o.CUSTOMERNUMBER = c.customer_id
 join {{ ref('dim_employees') }} e
     on c.employee_id = e.employee_id
 join {{ ref('dim_products') }} p
-    on od.productCode = p.product_id
+    on od.PRODUCTCODE = p.product_id
