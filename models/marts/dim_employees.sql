@@ -8,4 +8,5 @@ select
     officeCode as office_id,
     reportsTo as manager_id,
     jobTitle
-from {{ ref('stg_employees') }};
+from {{ ref('stg_employees') }}
+
