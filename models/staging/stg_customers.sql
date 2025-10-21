@@ -1,21 +1,22 @@
 {{ config(materialized='view') }}
 
 select
-    {{ dbt_utils.generate_surrogate_key(['customerNumber']) }} as customer_sk,
-    customerNumber as customer_id,
-    customerName as customer_name,
-    contactFirstName,
-    contactLastName,
-    phone,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    postalCode as postal_code,
-    country,
-    creditLimit,
-    salesRepEmployeeNumber as employee_id
+    CUSTOMERNUMBER as customer_id,
+    CUSTOMERNAME as customer_name,
+    CONTACTFIRSTNAME as contact_first_name,
+    CONTACTLASTNAME as contact_last_name,
+    PHONE,
+    ADDRESSLINE1 as address_line1,
+    ADDRESSLINE2 as address_line2,
+    CITY,
+    STATE,
+    POSTALCODE as postal_code,
+    COUNTRY,
+    SALESREPEMPLOYEENUMBER as sales_rep_id,
+    CREDITLIMIT as credit_limit
 from {{ source('sales', 'customers') }}
+
+
 
 
 
