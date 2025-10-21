@@ -13,4 +13,5 @@ select
     country,
     creditLimit,
     salesRepEmployeeNumber as employee_id
-from {{ ref('stg_customers') }};
+from {{ ref('stg_customers') }}
+
