@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: classicmodels
+    database: SALES_DB
+    schema: SALES_SCHEMA
+    tables:
+      - name: customers
+      - name: employees
+      - name: offices
+      - name: orders
+      - name: orderdetails
+      - name: products
+      - name: productlines
