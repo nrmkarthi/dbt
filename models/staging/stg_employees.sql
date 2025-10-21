@@ -1,14 +1,12 @@
+{{ config(materialized='view') }}
+
 select
-    EMPLOYEENUMBER as employeeNumber,
-    LASTNAME as lastName,
-    FIRSTNAME as firstName,
-    EXTENSION as extension,
-    EMAIL as email,
-    OFFICECODE as officeCode,
-    REPORTSTO as reportsTo,
-    JOBTITLE as jobTitle
+    EMPLOYEENUMBER as employee_id,
+    FIRSTNAME,
+    LASTNAME,
+    EXTENSION,
+    EMAIL,
+    OFFICECODE as office_id,
+    REPORTSTO as reports_to,
+    JOBTITLE as job_title
 from {{ source('sales', 'employees') }}
-
-
-
-
