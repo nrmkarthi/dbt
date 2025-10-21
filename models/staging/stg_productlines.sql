@@ -3,6 +3,6 @@
 select
     productLine as product_line,
     textDescription as product_line_description,
-    htmlDescription,
-    image
+    htmlDescription
+    
 from {{ source('classicmodels','productlines') }}
