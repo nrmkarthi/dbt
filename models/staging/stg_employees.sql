@@ -1,2 +1,3 @@
 select *
-from {{ source('classicmodels','employees') }};
+
+from {{ source('classicmodels','employees') }}
