@@ -1,16 +1,17 @@
 {{ config(materialized='table') }}
 
 select
+    {{ dbt_utils.generate_surrogate_key(['o.order_id','od.product_id']) }} as order_sk,
     o.order_id,
-    o.orderDate,
+    o.orderDate as order_date,
     o.status,
     o.customer_id,
-    c.name as customer_name,
+    c.customerName as customer_name,          -- match dim_customers
     e.employee_id,
     e.firstName || ' ' || e.lastName as employee_name,
     e.office_id,
     p.product_id,
-    p.productName,
+    p.product_name,
     p.buyPrice,
     od.quantity,
     (od.quantity * od.priceEach) as total_amount
