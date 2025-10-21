@@ -2,7 +2,7 @@ name: 'sales_star_schema_snowflake'
 version: '1.0'
 config-version: 2
 
-profile: 'sales_star_schema_snowflake'
+
 
 models:
   sales_star_schema_snowflake:
@@ -10,3 +10,4 @@ models:
       materialized: view
     marts:
       materialized: table
+
