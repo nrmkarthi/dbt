@@ -1,12 +1,15 @@
+{{ config(materialized='table') }}
+
 select
-    {{ dbt_utils.generate_surrogate_key(['employeeNumber']) }} as employee_sk,
-    employeeNumber as employee_id,
-    firstName,
-    lastName,
-    extension,
-    email,
-    officeCode as office_id,
-    reportsTo as manager_id,
-    jobTitle
-from {{ ref('stg_employees') }}
+    EMPLOYEENUMBER as employee_id,
+    FIRSTNAME,
+    LASTNAME,
+    EXTENSION,
+    EMAIL,
+    OFFICECODE as office_id,     -- alias here
+    REPORTSTO,
+    JOBTITLE
+from {{ source('sales', 'employees') }}
+
+
 
