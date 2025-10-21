@@ -1,7 +1,9 @@
+{{ config(materialized='table') }}
+
 select
-    {{ dbt_utils.generate_surrogate_key(['customerNumber']) }} as customer_sk,
-    customerNumber as customer_id,
-    customerName as customer_name,
+    customer_sk,
+    customer_id,
+    customer_name,
     contactFirstName,
     contactLastName,
     phone,
@@ -9,9 +11,8 @@ select
     addressLine2,
     city,
     state,
-    postalCode as postal_code,
+    postal_code,
     country,
     creditLimit,
-    salesRepEmployeeNumber as employee_id
+    employee_id
 from {{ ref('stg_customers') }}
-
