@@ -1,2 +1,3 @@
 select *
-from {{ source('classicmodels','orders') }};
+from {{ source('classicmodels','orders') }}
+
