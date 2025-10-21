@@ -6,9 +6,9 @@ select
     o.STATUS as order_status,
     o.CUSTOMERNUMBER as customer_id,
     c.customer_name,
-    e.EMPLOYEENUMBER as employee_id,
+    e.employee_id,  -- use alias from dim_employees
     e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
-    e.OFFICECODE as office_id,
+    e.office_id,    -- alias from dim_employees
     p.product_id,
     p.productName as product_name,
     p.buyPrice,
@@ -20,6 +20,6 @@ join {{ ref('stg_orderdetails') }} od
 join {{ ref('dim_customers') }} c
     on o.CUSTOMERNUMBER = c.customer_id
 join {{ ref('dim_employees') }} e
-    on c.employee_id = e.EMPLOYEENUMBER
+    on c.employee_id = e.employee_id  -- match alias
 join {{ ref('dim_products') }} p
     on od.PRODUCTCODE = p.product_id
