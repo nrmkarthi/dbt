@@ -10,4 +10,5 @@ select
     p.MSRP
 from {{ ref('stg_products') }} p
 left join {{ ref('stg_productlines') }} pl
-  on p.productLine = pl.productLine;
+  on p.productLine = pl.productLine
+
