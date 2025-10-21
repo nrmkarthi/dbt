@@ -1,23 +1,25 @@
+{{ config(materialized='table') }}
+
 select
-    {{ dbt_utils.generate_surrogate_key(['o.orderNumber','od.productCode']) }} as order_sk,
-    o.orderNumber as order_id,
-    o.orderDate as order_date,
-    o.requiredDate as required_date,
-    o.shippedDate as shipped_date,
+    o.order_id,
+    o.orderDate,
     o.status,
-    c.customer_sk,
-    p.product_sk,
-    e.employee_sk,
-    e.office_id as office_id,
-    od.quantityOrdered,
-    od.priceEach,
-    od.quantityOrdered * od.priceEach as total_amount
+    o.customer_id,
+    c.name as customer_name,
+    e.employee_id,
+    e.firstName || ' ' || e.lastName as employee_name,
+    e.office_id,
+    p.product_id,
+    p.productName,
+    p.buyPrice,
+    od.quantity,
+    (od.quantity * od.priceEach) as total_amount
 from {{ ref('stg_orders') }} o
 join {{ ref('stg_orderdetails') }} od
-  on o.orderNumber = od.orderNumber
+    on o.order_id = od.order_id
 join {{ ref('dim_customers') }} c
-  on o.customerNumber = c.customer_id
-join {{ ref('dim_products') }} p
-  on od.productCode = p.product_id
+    on o.customer_id = c.customer_id
 join {{ ref('dim_employees') }} e
-  on c.employee_id = e.employee_id;
+    on c.salesRepEmployeeNumber = e.employee_id
+join {{ ref('dim_products') }} p
+    on od.product_id = p.product_id
