@@ -9,9 +9,9 @@ select
     e.employee_id,
     e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
     e.office_id,
-    p.product_id,
-    p.product_name,
-    p.buyPrice,
+    p.PRODUCT_ID as product_id,
+    p.PRODUCTNAME as product_name,      -- <- use this exact name
+    p.BUYPRICE,
     od.QUANTITYORDERED as quantity,
     (od.QUANTITYORDERED * od.PRICEEACH) as total_amount
 from {{ ref('stg_orders') }} o
@@ -22,4 +22,4 @@ join {{ ref('dim_customers') }} c
 join {{ ref('dim_employees') }} e
     on c.employee_id = e.employee_id
 join {{ ref('dim_products') }} p
-    on od.PRODUCTCODE = p.product_id
+    on od.PRODUCTCODE = p.PRODUCT_ID
