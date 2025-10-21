@@ -1,15 +1,15 @@
 {{ config(materialized='view') }}
 
 select
-    {{ dbt_utils.generate_surrogate_key(['orderNumber']) }} as order_sk,
-    orderNumber as order_id,
-    orderDate,
-    requiredDate,
-    shippedDate,
-    status,
-    comments,
-    customerNumber as customer_id
+    ORDERNUMBER as orderNumber,
+    ORDERDATE as orderDate,
+    REQUIREDDATE as requiredDate,
+    SHIPPEDDATE as shippedDate,
+    STATUS as status,
+    CUSTOMERNUMBER as customerNumber
 from {{ source('sales', 'orders') }}
+
+
 
 
 
