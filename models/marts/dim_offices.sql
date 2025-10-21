@@ -9,4 +9,5 @@ select
     country,
     postalCode as postal_code,
     territory
-from {{ ref('stg_offices') }};
+from {{ ref('stg_offices') }}
+
