@@ -4,7 +4,7 @@ select
     o.orderDate as order_date,
     o.status,
     o.customer_id,
-    c.customer_name,          -- updated here
+    c.customer_name,
     e.employee_id,
     e.firstName || ' ' || e.lastName as employee_name,
     e.office_id,
@@ -19,6 +19,6 @@ join {{ ref('stg_orderdetails') }} od
 join {{ ref('dim_customers') }} c
     on o.customer_id = c.customer_id
 join {{ ref('dim_employees') }} e
-    on c.salesRepEmployeeNumber = e.employee_id
+    on c.employee_id = e.employee_id        -- use alias here
 join {{ ref('dim_products') }} p
     on od.product_id = p.product_id
