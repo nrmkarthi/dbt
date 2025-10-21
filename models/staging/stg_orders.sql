@@ -1,13 +1,15 @@
 {{ config(materialized='view') }}
 
 select
-    ORDERNUMBER as orderNumber,
-    ORDERDATE as orderDate,
-    REQUIREDDATE as requiredDate,
-    SHIPPEDDATE as shippedDate,
-    STATUS as status,
-    CUSTOMERNUMBER as customerNumber
+    ORDERNUMBER as order_id,
+    ORDERDATE as order_date,
+    REQUIREDDATE as required_date,
+    SHIPPEDDATE as shipped_date,
+    STATUS as order_status,
+    CUSTOMERNUMBER as customer_id
 from {{ source('sales', 'orders') }}
+
+
 
 
 
