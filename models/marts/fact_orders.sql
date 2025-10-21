@@ -1,12 +1,10 @@
-{{ config(materialized='table') }}
-
 select
     {{ dbt_utils.generate_surrogate_key(['o.order_id','od.product_id']) }} as order_sk,
     o.order_id,
     o.orderDate as order_date,
     o.status,
     o.customer_id,
-    c.customerName as customer_name,          -- match dim_customers
+    c.customer_name,          -- updated here
     e.employee_id,
     e.firstName || ' ' || e.lastName as employee_name,
     e.office_id,
