@@ -1,31 +1,25 @@
 {{ config(materialized='table') }}
 
 select
-    o.ORDERNUMBER as order_id,
-    o.ORDERDATE as order_date,
-    o.STATUS as order_status,
-    o.CUSTOMERNUMBER as customer_id,
-    
-    c.CUSTOMERNAME as customer_name,
-    c.SALESREPEMPLOYEENUMBER as sales_rep_id,
-    
-    e.EMPLOYEENUMBER as employee_id,
+    o.order_id,
+    o.order_date,
+    o.order_status,
+    o.customer_id,
+    c.customer_name,
+    c.sales_rep_id as employee_id,
     e.FIRSTNAME || ' ' || e.LASTNAME as employee_name,
-    e.OFFICECODE as office_id,
-    
-    p.PRODUCTCODE as product_id,
-    p.PRODUCTNAME as product_name,
-    p.BUYPRICE as buy_price,
-    
-    od.QUANTITYORDERED as quantity,
-    (od.QUANTITYORDERED * od.PRICEEACH) as total_amount
-
+    e.office_id,
+    od.product_id,
+    p.product_name,
+    p.buy_price,
+    od.quantity,
+    (od.quantity * od.price_each) as total_amount
 from {{ ref('stg_orders') }} o
 join {{ ref('stg_orderdetails') }} od
-    on o.ORDERNUMBER = od.ORDERNUMBER
+    on o.order_id = od.order_id
 join {{ ref('dim_customers') }} c
-    on o.CUSTOMERNUMBER = c.customer_id
+    on o.customer_id = c.customer_id
 left join {{ ref('dim_employees') }} e
-    on c.SALESREPEMPLOYEENUMBER = e.EMPLOYEENUMBER
+    on c.sales_rep_id = e.employee_id
 join {{ ref('dim_products') }} p
-    on od.PRODUCTCODE = p.PRODUCTCODE
+    on od.product_id = p.product_id
